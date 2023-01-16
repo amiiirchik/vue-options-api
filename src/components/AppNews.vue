@@ -3,7 +3,8 @@
         <h3>{{title}}</h3>
         <button @click="openNews">{{isOpenNews ? "Закрыть" : "Открыть"}}</button>
         <p v-if="isOpenNews">{{text}}</p>
-        <button @click="readNews">{{ wasReadNews ? "Не просмотрено" : "Просмотрено" }}</button>
+        <button v-if="!wasRead" @click="readNews()">Прочитано</button>
+        <button v-if="wasRead" @click="unReadNews()">Не прочитано</button>
         <hr>
     </div>
 </template>
@@ -24,7 +25,7 @@
             wasRead: Boolean,
             id: Number
         },
-        emits: ['open-news', 'read-news'],
+        emits: ['open-news', 'read-news', 'unread-news'],
         methods: {
             openNews(){
                 this.isOpenNews = !this.isOpenNews
@@ -38,7 +39,7 @@
             },
             unReadNews(){
                 this.isOpenNews = true
-                this.$emit('read-news', this.id)
+                this.$emit('unread-news', this.id)
             }
         }
     }
