@@ -13,13 +13,18 @@
     @read-news="readNews"
     @unread-news="unReadNews"
   />
-  <div>
-    <h1 v-for="title in arr" :key="title">{{title}}</h1>
-  </div>
+  <todo-list
+    v-for="item in news" 
+    :key="item"
+    :note-text="item.title"
+  />
+
 </template>
 
 <script>
 import AppNews from './components/AppNews.vue'
+import TodoList from './components/TodoList.vue'
+
   export default{
     name: 'App',
     data(){
@@ -39,7 +44,8 @@ import AppNews from './components/AppNews.vue'
       this.now = new Date().toLocaleTimeString()
     },
     components:{
-      'app-news': AppNews
+      'app-news': AppNews,
+      'todo-list': TodoList
     },
     methods:{
       openNews(){
