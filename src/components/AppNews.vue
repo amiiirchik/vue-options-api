@@ -1,15 +1,17 @@
 <template>
     <div>
         <h3>{{title}}</h3>
-        <button @click="openNews">{{isOpenNews ? "Закрыть" : "Открыть"}}</button>
+        <AppButton @click="openNews">{{isOpenNews ? "Закрыть" : "Открыть"}}</AppButton>
         <p v-if="isOpenNews">{{text}}</p>
-        <button v-if="!wasRead" @click="readNews()">Прочитано</button>
-        <button v-if="wasRead" @click="unReadNews()">Не прочитано</button>
+        <AppButton v-if="!wasRead" @click="readNews()">Прочитано</AppButton>
+        <AppButton v-if="wasRead" @click="unReadNews()">Не прочитано</AppButton>
         <hr>
     </div>
 </template>
   
 <script>
+import AppButton from './AppButton.vue'
+
     export default{
         name: 'AppNews',
         data(){
@@ -41,6 +43,7 @@
                 this.isOpenNews = true
                 this.$emit('unread-news', this.id)
             }
-        }
+        },
+        components: {AppButton}
     }
 </script>

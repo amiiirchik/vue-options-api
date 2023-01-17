@@ -45,7 +45,7 @@ import TodoList from './components/TodoList.vue'
     },
     components:{
       'app-news': AppNews,
-      'todo-list': TodoList
+      'todo-list': TodoList,
     },
     methods:{
       openNews(){
