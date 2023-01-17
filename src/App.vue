@@ -13,17 +13,19 @@
     @read-news="readNews"
     @unread-news="unReadNews"
   />
-  <todo-list
+
+  
+  <!-- <todo-list
     v-for="item in news" 
     :key="item"
     :note-text="item.title"
-  />
+  /> -->
 
 </template>
 
 <script>
 import AppNews from './components/AppNews.vue'
-import TodoList from './components/TodoList.vue'
+// import TodoList from './components/TodoList.vue'
 
   export default{
     name: 'App',
@@ -45,7 +47,12 @@ import TodoList from './components/TodoList.vue'
     },
     components:{
       'app-news': AppNews,
-      'todo-list': TodoList,
+    },
+    provide(){
+      return{
+        title: 'Список новостей',
+        news: this.news
+      }
     },
     methods:{
       openNews(){

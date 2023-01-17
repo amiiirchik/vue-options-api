@@ -1,16 +1,20 @@
 <template>
     <div>
         <h3>{{title}}</h3>
-        <AppButton @action="openNews">{{isOpenNews ? "Закрыть" : "Открыть"}}</AppButton>
+        <AppButton 
+            @action='openNews' 
+        >{{isOpenNews ? 'Закрыть' : 'Открыть'}}</AppButton>
         <p v-if="isOpenNews">{{text}}</p>
-        <AppButton text="Отметить прочитанной" v-if="!wasRead" @action="readNews()">Прочитано</AppButton>
-        <AppButton text="Отметить непрочитанной" v-if="wasRead" @action="unReadNews()">Не прочитано</AppButton>
+        <AppButton class="primary" v-if="!wasRead" @action="readNews()">Прочитано</AppButton>
+        <AppButton class="danger" v-if="wasRead" @action="unReadNews()">Не прочитано</AppButton>
+        <AppNewsList v-if="isOpenNews"></AppNewsList>
         <hr>
     </div>
 </template>
   
 <script>
 import AppButton from './AppButton.vue'
+import AppNewsList from './AppNewsList.vue'
 
     export default{
         name: 'AppNews',
@@ -25,7 +29,8 @@ import AppButton from './AppButton.vue'
             text: String,
             isOpen: Boolean,
             wasRead: Boolean,
-            id: Number
+            id: Number,
+           
         },
         emits: ['open-news', 'read-news', 'unread-news'],
         methods: {
@@ -40,13 +45,13 @@ import AppButton from './AppButton.vue'
                 this.$emit('read-news', this.id)
             },
             unReadNews(){
-                this.isOpenNews = true
+                // this.isOpenNews = true
                 this.$emit('unread-news', this.id)
             },
             action(){
 
             }
         },
-        components: {AppButton}
+        components: {AppButton, AppNewsList}
     }
 </script>

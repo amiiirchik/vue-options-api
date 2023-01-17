@@ -4,7 +4,9 @@
         :class="color"
         @click="$emit('action')"
         >
-        {{text}}</button>
+       
+    <slot />
+    </button>
 
 </template>
   
@@ -20,7 +22,6 @@ export default {
                 return ['', 'primary', 'danger'].includes(value)
             }
         },
-        text: String
     }
 }
 </script>
